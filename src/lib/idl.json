@@ -1,0 +1,1341 @@
+{
+  "address": "GmfiX2zNev72AQSK9Lygrmg6yN135Y95Gj3evz3kQhWM",
+  "metadata": {
+    "name": "bounty_board",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "claim_bounty_sol",
+      "discriminator": [
+        129,
+        209,
+        118,
+        9,
+        101,
+        176,
+        152,
+        210
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "docs": [
+            "Your backend's hot wallet — the only key allowed to trigger payouts"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "bounty",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  111,
+                  117,
+                  110,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bounty.poster",
+                "account": "BountyAccount"
+              },
+              {
+                "kind": "account",
+                "path": "bounty.bounty_id",
+                "account": "BountyAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "winner",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "claim_bounty_usdc",
+      "discriminator": [
+        127,
+        235,
+        149,
+        26,
+        166,
+        245,
+        62,
+        147
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "docs": [
+            "Your backend hot wallet — pays for hunter ATA creation if needed"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "bounty",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  111,
+                  117,
+                  110,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bounty.poster",
+                "account": "BountyAccount"
+              },
+              {
+                "kind": "account",
+                "path": "bounty.bounty_id",
+                "account": "BountyAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "bounty_token_account",
+          "docs": [
+            "The escrow ATA owned by the bounty PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "bounty"
+              },
+              {
+                "kind": "account",
+                "path": "token_program"
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "hunter_token_account",
+          "docs": [
+            "Hunter's ATA — created automatically if it doesn't exist"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "winner"
+              },
+              {
+                "kind": "account",
+                "path": "token_program"
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "winner",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_bounty_test",
+      "discriminator": [
+        246,
+        30,
+        51,
+        114,
+        0,
+        60,
+        173,
+        168
+      ],
+      "accounts": [
+        {
+          "name": "poster",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "bounty",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  111,
+                  117,
+                  110,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "poster"
+              },
+              {
+                "kind": "arg",
+                "path": "bounty_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "bounty_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "pick_winner",
+      "discriminator": [
+        227,
+        62,
+        25,
+        73,
+        132,
+        106,
+        68,
+        96
+      ],
+      "accounts": [
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "bounty",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  111,
+                  117,
+                  110,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bounty.poster",
+                "account": "BountyAccount"
+              },
+              {
+                "kind": "account",
+                "path": "bounty.bounty_id",
+                "account": "BountyAccount"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "winner",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "post_bounty_sol",
+      "discriminator": [
+        83,
+        84,
+        131,
+        81,
+        254,
+        214,
+        167,
+        156
+      ],
+      "accounts": [
+        {
+          "name": "poster",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "bounty",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  111,
+                  117,
+                  110,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "poster"
+              },
+              {
+                "kind": "arg",
+                "path": "bounty_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "price_update"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "bounty_id",
+          "type": "u64"
+        },
+        {
+          "name": "amount_usd",
+          "type": "u64"
+        },
+        {
+          "name": "expiry_date",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "post_bounty_test",
+      "discriminator": [
+        14,
+        75,
+        12,
+        5,
+        15,
+        206,
+        0,
+        65
+      ],
+      "accounts": [
+        {
+          "name": "poster",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "bounty",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  111,
+                  117,
+                  110,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "poster"
+              },
+              {
+                "kind": "arg",
+                "path": "bounty_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "bounty_id",
+          "type": "u64"
+        },
+        {
+          "name": "lamports",
+          "type": "u64"
+        },
+        {
+          "name": "expiry_date",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "post_bounty_usdc",
+      "discriminator": [
+        191,
+        177,
+        199,
+        194,
+        221,
+        75,
+        141,
+        131
+      ],
+      "accounts": [
+        {
+          "name": "poster",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "bounty",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  111,
+                  117,
+                  110,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "poster"
+              },
+              {
+                "kind": "arg",
+                "path": "bounty_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "poster_token_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "poster"
+              },
+              {
+                "kind": "account",
+                "path": "token_program"
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "bounty_token_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "bounty"
+              },
+              {
+                "kind": "account",
+                "path": "token_program"
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "bounty_id",
+          "type": "u64"
+        },
+        {
+          "name": "amount_usd",
+          "type": "u64"
+        },
+        {
+          "name": "expiry_date",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "refund_bounty",
+      "discriminator": [
+        167,
+        234,
+        121,
+        108,
+        247,
+        216,
+        216,
+        124
+      ],
+      "accounts": [
+        {
+          "name": "poster",
+          "docs": [
+            "The original poster — receives the refund"
+          ],
+          "writable": true
+        },
+        {
+          "name": "bounty",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  111,
+                  117,
+                  110,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bounty.poster",
+                "account": "BountyAccount"
+              },
+              {
+                "kind": "account",
+                "path": "bounty.bounty_id",
+                "account": "BountyAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Backend executor — the only key allowed to trigger refunds"
+          ],
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "refund_bounty_usdc",
+      "discriminator": [
+        111,
+        164,
+        182,
+        200,
+        24,
+        89,
+        127,
+        63
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "bounty",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  111,
+                  117,
+                  110,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bounty.poster",
+                "account": "BountyAccount"
+              },
+              {
+                "kind": "account",
+                "path": "bounty.bounty_id",
+                "account": "BountyAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "bounty_token_account",
+          "docs": [
+            "Bounty's escrow ATA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "bounty"
+              },
+              {
+                "kind": "account",
+                "path": "token_program"
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "poster_token_account",
+          "docs": [
+            "Poster's ATA — receives the refund"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "poster"
+              },
+              {
+                "kind": "account",
+                "path": "token_program"
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "poster",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "BountyAccount",
+      "discriminator": [
+        79,
+        173,
+        237,
+        26,
+        118,
+        105,
+        127,
+        194
+      ]
+    },
+    {
+      "name": "PriceUpdateV2",
+      "discriminator": [
+        34,
+        241,
+        35,
+        99,
+        157,
+        126,
+        244,
+        205
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "BountyClaimed",
+      "discriminator": [
+        140,
+        202,
+        21,
+        51,
+        211,
+        65,
+        142,
+        21
+      ]
+    },
+    {
+      "name": "BountyPosted",
+      "discriminator": [
+        61,
+        61,
+        26,
+        239,
+        184,
+        44,
+        139,
+        232
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NotOpen",
+      "msg": "Bounty is not in Open state"
+    },
+    {
+      "code": 6001,
+      "name": "Unauthorized",
+      "msg": "Signer is not poster or hunter"
+    },
+    {
+      "code": 6002,
+      "name": "Expired",
+      "msg": "Bounty has expired already"
+    },
+    {
+      "code": 6003,
+      "name": "WrongWinner",
+      "msg": "This address is not the winner of the bounty"
+    },
+    {
+      "code": 6004,
+      "name": "StalePrice",
+      "msg": "Pyth price is too old"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidPrice",
+      "msg": "Invalid price"
+    },
+    {
+      "code": 6006,
+      "name": "LowConfidence",
+      "msg": "Price confidence too low"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidExponent",
+      "msg": "Invalid price exponent"
+    },
+    {
+      "code": 6008,
+      "name": "MathOverflow",
+      "msg": "Math overflow"
+    },
+    {
+      "code": 6009,
+      "name": "InvalidMint",
+      "msg": "Invalid Token Mint"
+    },
+    {
+      "code": 6010,
+      "name": "NotSplBounty",
+      "msg": "Bounty is not an SPL token bounty"
+    },
+    {
+      "code": 6011,
+      "name": "WrongTokenMint",
+      "msg": "Wrong token mint for this bounty"
+    },
+    {
+      "code": 6012,
+      "name": "WrongHunterAccount",
+      "msg": "Hunter token account does not match winner"
+    },
+    {
+      "code": 6013,
+      "name": "NotExpired",
+      "msg": "Bounty has not expired yet"
+    }
+  ],
+  "types": [
+    {
+      "name": "BountyAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poster",
+            "type": "pubkey"
+          },
+          {
+            "name": "winner",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "bounty_id",
+            "type": "u64"
+          },
+          {
+            "name": "amount_usd",
+            "type": "u64"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "token_mint",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "price_used",
+            "type": "i64"
+          },
+          {
+            "name": "price_expo",
+            "type": "i32"
+          },
+          {
+            "name": "expiry_date",
+            "type": "i64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "BountyStatus"
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BountyClaimed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "hunter",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BountyPosted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bounty_id",
+            "type": "u64"
+          },
+          {
+            "name": "poster",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_usd",
+            "type": "u64"
+          },
+          {
+            "name": "amount_raw",
+            "type": "u64"
+          },
+          {
+            "name": "token_mint",
+            "type": {
+              "option": "pubkey"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "BountyStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Open"
+          },
+          {
+            "name": "Paused"
+          },
+          {
+            "name": "Claimed"
+          },
+          {
+            "name": "Disputed"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PriceFeedMessage",
+      "repr": {
+        "kind": "c"
+      },
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "feed_id",
+            "docs": [
+              "`FeedId` but avoid the type alias because of compatibility issues with Anchor's `idl-build` feature."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "price",
+            "type": "i64"
+          },
+          {
+            "name": "conf",
+            "type": "u64"
+          },
+          {
+            "name": "exponent",
+            "type": "i32"
+          },
+          {
+            "name": "publish_time",
+            "docs": [
+              "The timestamp of this price update in seconds"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "prev_publish_time",
+            "docs": [
+              "The timestamp of the previous price update. This field is intended to allow users to",
+              "identify the single unique price update for any moment in time:",
+              "for any time t, the unique update is the one such that prev_publish_time < t <= publish_time.",
+              "",
+              "Note that there may not be such an update while we are migrating to the new message-sending logic,",
+              "as some price updates on pythnet may not be sent to other chains (because the message-sending",
+              "logic may not have triggered). We can solve this problem by making the message-sending mandatory",
+              "(which we can do once publishers have migrated over).",
+              "",
+              "Additionally, this field may be equal to publish_time if the message is sent on a slot where",
+              "where the aggregation was unsuccesful. This problem will go away once all publishers have",
+              "migrated over to a recent version of pyth-agent."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "ema_price",
+            "type": "i64"
+          },
+          {
+            "name": "ema_conf",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PriceUpdateV2",
+      "docs": [
+        "A price update account. This account is used by the Pyth Receiver program to store a verified price update from a Pyth price feed.",
+        "It contains:",
+        "- `write_authority`: The write authority for this account. This authority can close this account to reclaim rent or update the account to contain a different price update.",
+        "- `verification_level`: The [`VerificationLevel`] of this price update. This represents how many Wormhole guardian signatures have been verified for this price update.",
+        "- `price_message`: The actual price update.",
+        "- `posted_slot`: The slot at which this price update was posted."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "write_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "verification_level",
+            "type": {
+              "defined": {
+                "name": "VerificationLevel"
+              }
+            }
+          },
+          {
+            "name": "price_message",
+            "type": {
+              "defined": {
+                "name": "PriceFeedMessage"
+              }
+            }
+          },
+          {
+            "name": "posted_slot",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VerificationLevel",
+      "docs": [
+        "Pyth price updates are bridged to all blockchains via Wormhole.",
+        "Using the price updates on another chain requires verifying the signatures of the Wormhole guardians.",
+        "The usual process is to check the signatures for two thirds of the total number of guardians, but this can be cumbersome on Solana because of the transaction size limits,",
+        "so we also allow for partial verification.",
+        "",
+        "This enum represents how much a price update has been verified:",
+        "- If `Full`, we have verified the signatures for two thirds of the current guardians.",
+        "- If `Partial`, only `num_signatures` guardian signatures have been checked.",
+        "",
+        "# Warning",
+        "Using partially verified price updates is dangerous, as it lowers the threshold of guardians that need to collude to produce a malicious price update."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Partial",
+            "fields": [
+              {
+                "name": "num_signatures",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Full"
+          }
+        ]
+      }
+    }
+  ]
+}
