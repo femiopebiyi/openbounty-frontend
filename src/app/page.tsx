@@ -132,8 +132,8 @@ export default function HomePage() {
           {/* Main */}
           <div>
             {/* Toolbar */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-5">
-              <div className="flex-1 max-w-md">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-5 min-w-0 w-full">
+              <div className="flex-1 max-w-md min-w-0">
                 <Input
                   placeholder="Search bounties, repos, users…"
                   leftIcon={<Search className="w-3.5 h-3.5" />}
@@ -152,7 +152,7 @@ export default function HomePage() {
                 />
               </div>
 
-              <div className="flex items-center gap-2 overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-none">
+              <div className="flex items-center gap-2 overflow-x-auto scrollbar-none min-w-0">
                 {STATUS_FILTERS.map((f) => (
                   <button
                     key={f.value}
